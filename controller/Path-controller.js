@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Path = require("../models/Path");
+const { shortestPath } = require("../service/getShortestPath");
 
 // const getAllPaths = async(req,res,next) =>{
 //     let blogs;
@@ -27,7 +28,16 @@ const getAllPaths = (req, res) => {
 }
 
 const getShortestPath = (req, res) => {
-    
+    Path.find()
+        .then((todo) => {
+            let path = shortestPath(todo,"A","F");
+            res.status(200).json(path)
+        })
+        .catch((err) =>
+            res
+                .status(404)
+                .json({ message: "Todo not found", error: err.message })
+        );
 }
 
 
@@ -88,4 +98,4 @@ const deleteBlog = async (req, res, next) => {
     }
 }
 
-module.exports = { getAllPaths : getAllPaths } ;
+module.exports = { getAllPaths : getAllPaths , getShortestPath : getShortestPath} ;
