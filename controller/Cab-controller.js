@@ -1,15 +1,20 @@
 const mongoose = require("mongoose");
 const Cab = require("../models/Cab");
+const { availableCabs } = require("../service/getAvailableCabs");
 
 const getAllCabs = (req, res) => {
     Cab.find()
-        .then((todo) => res.status(200).json(todo))
+        .then((todo) => {
+            let data = availableCabs(todo,req.body.time);
+            res.status(200).json(todo);
+        })
         .catch((err) =>
             res
                 .status(404)
-                .json({ message: "Todo not found", error: err.message })
+                .json({ message: "Cabs not found", error: err.message })
         );
 }
+
 
 const putUpdateCabs = (req, res) => {
     Cab.findByIdAndUpdate(req.params.id, req.body)

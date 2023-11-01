@@ -15,7 +15,7 @@ const getAllPaths = (req, res) => {
 const getShortestPath = (req, res) => {
     Path.find()
         .then((todo) => {
-            let path = shortestPath(todo,"A","F");
+            let path = shortestPath(todo,req.body.v1,req.body.v2);
             res.status(200).json(path)
         })
         .catch((err) =>
@@ -32,7 +32,7 @@ const putUpdatePath = (req, res) => {
         .catch((err) =>
             res
                 .status(400)
-                .json({ message: "Failed to update todo", error: err.message })
+                .json({ message: "Failed to update path data", error: err.message })
         );
 };
 
