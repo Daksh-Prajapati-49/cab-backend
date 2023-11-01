@@ -1,6 +1,8 @@
 const express = require("express")
 const pathRouter = express.Router();
-const { getAllPaths , getShortestPath } = require("../controller/Path-controller");
+const { getAllPaths , getShortestPath, putUpdatePath } = require("../controller/Path-controller");
 pathRouter.get("/",getAllPaths);
-pathRouter.get("/sh/",getShortestPath);
+pathRouter.get("/shortest_path/",getShortestPath);
+pathRouter.put("/:id", putUpdatePath);
+
 module.exports = pathRouter ;
