@@ -7,6 +7,7 @@ const connectDB = require("./config/db"); //added
 
 const pathRouter = require("./routes/path-routes");
 const cabRouter = require("./routes/cab-routes");
+const bookRouter = require("./routes/book-routes");
 
 const app = express();
 app.use(cors());
@@ -20,6 +21,7 @@ app.use(express.json({ extended: false }));
 
 app.use("/api/paths",pathRouter);
 app.use("/api/cabs",cabRouter);
+app.use("/api/bookings",bookRouter);
 app.get("/", (req, res) => res.send("Server up and running"));
 
 // setting up port

@@ -12,6 +12,16 @@ const getAllPaths = (req, res) => {
         );
 }
 
+const postCreatePath = (req, res) => {
+    Cab.create(req.body)
+        .then((data) => res.json({ message: "Path added successfully", data }))
+        .catch((err) =>
+            res
+                .status(400)
+                .json({ message: "Failed to add Path details", error: err.message })
+        );
+};
+
 const getShortestPath = (req, res) => {
     Path.find()
         .then((todo) => {
@@ -38,4 +48,4 @@ const putUpdatePath = (req, res) => {
 
 
 
-module.exports = { getAllPaths : getAllPaths , getShortestPath : getShortestPath, putUpdatePath : putUpdatePath } ;
+module.exports = { getAllPaths : getAllPaths , getShortestPath : getShortestPath, postCreatePath : postCreatePath, putUpdatePath : putUpdatePath } ;
